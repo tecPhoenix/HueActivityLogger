@@ -17,7 +17,7 @@ def hueAuthenticate():
 	payload = '{"devicetype":"activityLogger"}'
 	
 	while (apiKey == ""):
-		r = requests.post(baseRequestUrl,data=payload)
+		r = requests.post(baseRequestUrl,light_data=payload)
 		responseArr = r.json()
 		
 		try:
@@ -30,18 +30,23 @@ def hueAuthenticate():
 		time.sleep(2)
 
 def checkForChanges():
+
 	enabled = True
 	lightUrl = baseRequestUrl+"/"+apiKey+"/lights"
-	data = requests.get(lightUrl).json()
+	sensorUrl = baseRequestUrl+"/"+apiKey+"/sensors"
 	
+	light_data = requests.get(lightUrl).json()
+	sensor_data = requests.get(sensorUrl).json()
+
 	while (enabled == True):
-		if (not np.array_equal(requests.get(lightUrl).json(),data)): #Compares the old-saved and new array
+		if (not np.array_equal(requests.get(lightUrl).json(),light_data) or not np.array_equal(requests.get(sensorUrl).json(), sensor_data)): #Compares the old-saved and new array
 			now = datetime.now()
 			
-			infoString = "Changes detected - "+now.strftime("%d/%m/%Y %H:%M:%S")
+			infoString = "Action detected - "+now.strftime("%d/%m/%Y %H:%M:%S")
 			print(infoString)
 			log.write(infoString+"\n")
-			data = requests.get(lightUrl).json()
+			light_data = requests.get(lightUrl).json()
+			sensor_data = requests.get(sensorUrl).json()
 		time.sleep(2)
 
 if (open("hueApiKey.txt","r").read() == ""):

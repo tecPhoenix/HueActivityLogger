@@ -1,4 +1,4 @@
--- Tool for logging Philips Hue light changes --
+-- Tool for logging Philips Hue device changes --
 
 Needed Libraries:
 	- Requests (pip install requests)
