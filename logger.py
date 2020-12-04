@@ -17,7 +17,7 @@ def hueAuthenticate():
 	payload = '{"devicetype":"activityLogger"}'
 	
 	while (apiKey == ""):
-		r = requests.post(baseRequestUrl,light_data=payload)
+		r = requests.post(baseRequestUrl,data=payload)
 		responseArr = r.json()
 		
 		try:
@@ -34,7 +34,7 @@ def checkForChanges():
 	enabled = True
 	lightUrl = baseRequestUrl+"/"+apiKey+"/lights"
 	sensorUrl = baseRequestUrl+"/"+apiKey+"/sensors"
-	
+
 	light_data = requests.get(lightUrl).json()
 	sensor_data = requests.get(sensorUrl).json()
 
