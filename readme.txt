@@ -4,8 +4,11 @@ Needed Libraries:
 	- Requests (pip install requests)
 	- Numpy (pip install numpy)
 
-Please make sure to change your IP Address in logger.py!
+Please make sure to enter the IP Adress of your hue bridge in logger.py!
 
+After that, start the tool and press the link button of your bridge.
 
-Thank you for using my Tool!
+If you found any bugs or errors, feel free to open an issue.
+
+Thanks.
 
